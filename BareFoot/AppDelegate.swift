@@ -8,6 +8,9 @@
 
 import UIKit
 import CoreData
+import Firebase
+
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,9 +18,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions:
+        [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        self.setLocalData(application);
+        FirebaseApp.configure()
         return true
+    }
+    
+    func setLocalData(_ application: UIApplication){
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        let entity = NSEntityDescription.entity(forEntityName: "School", in: context)
+        let newSchool = NSManagedObject(entity: entity!, insertInto: context)
+        newSchool.setValue("ABCSchool", forKey: "schoolid")
+        newSchool.setValue("1234", forKey: "password")
+        let teacher = NSEntityDescription.entity(forEntityName: "Teachers", in: context)
+        let newTeacher = NSManagedObject(entity: teacher!, insertInto: context)
+        newTeacher.setValue("1234", forKey: "teachersid")
+        newTeacher.setValue("Anand Kumar", forKey: "teachername")
+        newTeacher.setValue("1B", forKey: "classid")
+        do{
+            try context.save()
+        } catch _ as NSError{
+            print("Could Not Save Context")
+        }
+
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
