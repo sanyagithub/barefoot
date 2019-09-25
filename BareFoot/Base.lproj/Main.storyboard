@@ -719,6 +719,9 @@
                                                 </fragment>
                                             </attributedString>
                                         </state>
+                                        <connections>
+                                            <action selector="CreateActivityButton:" destination="4Ki-fJ-sPm" eventType="touchUpInside" id="jd2-pm-qAE"/>
+                                        </connections>
                                     </button>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Today's Students" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="qnx-j3-LUc">
                                         <rect key="frame" x="8" y="310" width="359" height="34"/>
@@ -793,6 +796,7 @@
                         <viewLayoutGuide key="safeArea" id="yD1-ng-FzR"/>
                     </view>
                     <connections>
+                        <outlet property="ActivitySubmitButton" destination="x83-Qu-uWB" id="Ftd-qM-IFV"/>
                         <outlet property="imageView" destination="j7i-8l-Roz" id="fW2-sX-5Pu"/>
                     </connections>
                 </viewController>

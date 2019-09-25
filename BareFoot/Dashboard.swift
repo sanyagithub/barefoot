@@ -12,6 +12,7 @@ import CoreData
 
 class Dashboard: UIViewController {
     
+
     var TeacherId:String = ""
     
     @IBOutlet weak var TeacherName: UILabel!
@@ -25,6 +26,12 @@ class Dashboard: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         TeacherName?.text = getTeacherName(TeacherId: TeacherId)
+        let date = NSDate()
+        let formatter = DateFormatter()
+        
+        formatter.dateFormat = "dd/MM/yyyy"
+        let result = formatter.string(from: date as Date)
+        Date.text = result
         // Do any additional setup after loading the view, typically from a nib.
     }
     

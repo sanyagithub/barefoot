@@ -12,6 +12,9 @@ class Activity: UIViewController, UINavigationControllerDelegate, UIImagePickerC
     
     var imagePicker: UIImagePickerController!
     
+    @IBAction func CreateActivityButton(_ sender: Any) {
+    }
+    
     @IBOutlet weak var imageView: UIImageView!
     @IBAction func takePhoto(_ sender: Any) {
         imagePicker =  UIImagePickerController()
