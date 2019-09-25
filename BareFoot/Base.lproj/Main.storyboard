@@ -475,6 +475,9 @@
                                                 </fragment>
                                             </attributedString>
                                         </state>
+                                        <connections>
+                                            <action selector="takePhoto:" destination="esj-fv-Jui" eventType="touchUpInside" id="7y3-1B-SXL"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dZW-gc-iW9">
                                         <rect key="frame" x="8" y="8" width="137" height="21"/>
@@ -530,6 +533,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <viewLayoutGuide key="safeArea" id="NWm-hr-pVQ"/>
                     </view>
+                    <connections>
+                        <outlet property="imageView" destination="H0a-dM-zdM" id="dVO-Ri-8KG"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cxx-Ho-hQz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -668,7 +674,7 @@
         <!--Activity-->
         <scene sceneID="vxe-Tc-v5X">
             <objects>
-                <viewController id="4Ki-fJ-sPm" userLabel="Activity" sceneMemberID="viewController">
+                <viewController id="4Ki-fJ-sPm" userLabel="Activity" customClass="Activity" customModule="BareFoot" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="erE-Ce-BAT">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -774,6 +780,9 @@
                                         </fragment>
                                     </attributedString>
                                 </state>
+                                <connections>
+                                    <action selector="takePhoto:" destination="4Ki-fJ-sPm" eventType="touchUpInside" id="m2C-nc-WfG"/>
+                                </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j7i-8l-Roz">
                                 <rect key="frame" x="67" y="20" width="240" height="167"/>
@@ -783,6 +792,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <viewLayoutGuide key="safeArea" id="yD1-ng-FzR"/>
                     </view>
+                    <connections>
+                        <outlet property="imageView" destination="j7i-8l-Roz" id="fW2-sX-5Pu"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hVP-ox-A8I" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
