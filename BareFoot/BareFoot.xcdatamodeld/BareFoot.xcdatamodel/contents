@@ -14,6 +14,7 @@
         <attribute name="classid" optional="YES" attributeType="UUID" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="image" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="numberOfStudents" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
     </entity>
     <entity name="LessonPlan" representedClassName="LessonPlan" syncable="YES" codeGenerationType="class">
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
@@ -25,6 +26,12 @@
     <entity name="School" representedClassName="School" syncable="YES" codeGenerationType="class">
         <attribute name="password" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="schoolid" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="StudentPresence" representedClassName="StudentPresence" syncable="YES" codeGenerationType="class">
+        <attribute name="attendaceid" optional="YES" attributeType="UUID" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="studentId" optional="YES" attributeType="UUID" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="studentPresence" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="attendance" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AttendanceTable" syncable="YES"/>
     </entity>
     <entity name="Students" representedClassName="Students" syncable="YES" codeGenerationType="class">
         <attribute name="classid" optional="YES" attributeType="UUID" usesScalarValueType="NO" syncable="YES"/>
@@ -38,11 +45,12 @@
         <relationship name="students" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Students" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Activities" positionX="-36" positionY="18" width="128" height="150"/>
-        <element name="AttendanceTable" positionX="-18" positionY="27" width="128" height="105"/>
+        <element name="Activities" positionX="223" positionY="126" width="128" height="150"/>
+        <element name="AttendanceTable" positionX="187" positionY="-81" width="128" height="120"/>
         <element name="LessonPlan" positionX="0" positionY="45" width="128" height="120"/>
-        <element name="School" positionX="-63" positionY="-18" width="128" height="73"/>
-        <element name="Students" positionX="-54" positionY="9" width="128" height="90"/>
-        <element name="Teachers" positionX="-63" positionY="0" width="128" height="105"/>
+        <element name="School" positionX="-153" positionY="-243" width="128" height="73"/>
+        <element name="Students" positionX="-189" positionY="-126" width="128" height="90"/>
+        <element name="Teachers" positionX="-450" positionY="-54" width="128" height="105"/>
+        <element name="StudentPresence" positionX="196" positionY="-279" width="128" height="105"/>
     </elements>
 </model>
