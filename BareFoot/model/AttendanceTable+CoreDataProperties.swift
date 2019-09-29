@@ -16,8 +16,8 @@ extension AttendanceTable {
         return NSFetchRequest<AttendanceTable>(entityName: "AttendanceTable")
     }
 
-    @NSManaged public var attendanceid: UUID?
-    @NSManaged public var classid: UUID?
+    @NSManaged public var attendanceid: String?
+    @NSManaged public var classid: String?
     @NSManaged public var date: NSDate?
     @NSManaged public var image: NSData?
     @NSManaged public var numberOfStudents: Int16

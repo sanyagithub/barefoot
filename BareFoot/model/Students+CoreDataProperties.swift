@@ -16,8 +16,8 @@ extension Students {
         return NSFetchRequest<Students>(entityName: "Students")
     }
 
-    @NSManaged public var classid: UUID?
-    @NSManaged public var studentid: UUID?
+    @NSManaged public var classid: String?
+    @NSManaged public var studentid: String?
     @NSManaged public var studentname: String?
 
 }

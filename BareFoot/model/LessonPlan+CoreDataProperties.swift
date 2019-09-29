@@ -18,8 +18,8 @@ extension LessonPlan {
 
     @NSManaged public var date: NSDate?
     @NSManaged public var image: NSData?
-    @NSManaged public var lessonplanid: UUID?
-    @NSManaged public var teacherid: UUID?
+    @NSManaged public var lessonplanid: String?
+    @NSManaged public var teacherid: String?
     @NSManaged public var teacher: Teachers?
 
 }

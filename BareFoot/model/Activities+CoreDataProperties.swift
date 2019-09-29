@@ -16,9 +16,9 @@ extension Activities {
         return NSFetchRequest<Activities>(entityName: "Activities")
     }
 
-    @NSManaged public var activityid: UUID?
-    @NSManaged public var attendanceid: UUID?
-    @NSManaged public var classid: UUID?
+    @NSManaged public var activityid: String?
+    @NSManaged public var attendanceid: String?
+    @NSManaged public var classid: String?
     @NSManaged public var desc: String?
     @NSManaged public var image: NSData?
     @NSManaged public var name: String?
