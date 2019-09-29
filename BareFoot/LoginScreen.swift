@@ -51,14 +51,12 @@ class LoginScreen: UIViewController {
                 let password = data.value(forKey: "password") as! String
                 if((SchoolId.text! == "\(schoolid)") && (Password.text! == "\(password)")){
                     self.loadDashboard()
-                } else {
-                    self.displayErrorMessage(message: "Invalid SchoolId/Password")
-                }
+                } 
             }
             
         } catch {
             
-            print("Failed")
+            self.displayErrorMessage(message: "Invalid SchoolId/Password")
         }
       
     }
