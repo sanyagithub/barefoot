@@ -16,8 +16,8 @@ extension StudentPresence {
         return NSFetchRequest<StudentPresence>(entityName: "StudentPresence")
     }
 
-    @NSManaged public var studentId: UUID?
     @NSManaged public var attendaceid: UUID?
+    @NSManaged public var studentId: UUID?
     @NSManaged public var studentPresence: Bool
     @NSManaged public var attendance: AttendanceTable?
 

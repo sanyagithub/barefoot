@@ -2,22 +2,10 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:model/Teachers+CoreDataClass.swift">
+      location = "group:model/LessonPlan+CoreDataClass.swift">
    </FileRef>
    <FileRef
-      location = "group:model/Teachers+CoreDataProperties.swift">
-   </FileRef>
-   <FileRef
-      location = "group:model/StudentPresence+CoreDataClass.swift">
-   </FileRef>
-   <FileRef
-      location = "group:model/StudentPresence+CoreDataProperties.swift">
-   </FileRef>
-   <FileRef
-      location = "group:model/School+CoreDataClass.swift">
-   </FileRef>
-   <FileRef
-      location = "group:model/School+CoreDataProperties.swift">
+      location = "group:model/LessonPlan+CoreDataProperties.swift">
    </FileRef>
    <FileRef
       location = "group:model/Activities+CoreDataClass.swift">
@@ -26,10 +14,10 @@
       location = "group:model/Activities+CoreDataProperties.swift">
    </FileRef>
    <FileRef
-      location = "group:model/AttendanceTable+CoreDataClass.swift">
+      location = "group:model/StudentPresence+CoreDataClass.swift">
    </FileRef>
    <FileRef
-      location = "group:model/AttendanceTable+CoreDataProperties.swift">
+      location = "group:model/StudentPresence+CoreDataProperties.swift">
    </FileRef>
    <FileRef
       location = "group:model/Students+CoreDataClass.swift">
@@ -38,10 +26,22 @@
       location = "group:model/Students+CoreDataProperties.swift">
    </FileRef>
    <FileRef
-      location = "group:model/LessonPlan+CoreDataClass.swift">
+      location = "group:model/AttendanceTable+CoreDataClass.swift">
    </FileRef>
    <FileRef
-      location = "group:model/LessonPlan+CoreDataProperties.swift">
+      location = "group:model/AttendanceTable+CoreDataProperties.swift">
+   </FileRef>
+   <FileRef
+      location = "group:model/School+CoreDataClass.swift">
+   </FileRef>
+   <FileRef
+      location = "group:model/School+CoreDataProperties.swift">
+   </FileRef>
+   <FileRef
+      location = "group:model/Teachers+CoreDataClass.swift">
+   </FileRef>
+   <FileRef
+      location = "group:model/Teachers+CoreDataProperties.swift">
    </FileRef>
    <FileRef
       location = "group:BareFoot.xcodeproj">
