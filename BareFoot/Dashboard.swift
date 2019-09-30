@@ -74,6 +74,27 @@ class Dashboard: UIViewController {
     
     @IBOutlet weak var Activity: UIView!
     @IBOutlet weak var Records: UIView!
+    
+    func loadPrepareLessons(){
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let loggedInViewController = storyBoard.instantiateViewController(withIdentifier: "Dashboard") as! Dashboard
+        loggedInViewController.TeacherId = TeacherId.text!
+        self.present(loggedInViewController, animated: true, completion: nil)
+    }
+    
+    func loadAttendance(){
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let loggedInViewController = storyBoard.instantiateViewController(withIdentifier: "Dashboard") as! Dashboard
+        loggedInViewController.TeacherId = TeacherId.text!
+        self.present(loggedInViewController, animated: true, completion: nil)
+    }
+    
+    func loadActivity(){
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let loggedInViewController = storyBoard.instantiateViewController(withIdentifier: "Dashboard") as! Dashboard
+        loggedInViewController.TeacherId = TeacherId.text!
+        self.present(loggedInViewController, animated: true, completion: nil)
+    }
 }
 
 

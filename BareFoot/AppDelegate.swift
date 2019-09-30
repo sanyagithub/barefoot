@@ -12,6 +12,10 @@ import Firebase
 
 
 
+
+
+
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -20,14 +24,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions:
         [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        self.setLocalData(application);
-        let defaults = NSUserDefaults.standardUserDefaults()
-        let isPreloaded = defaults.boolForKey("isPreloaded")
+        //self.setLocalData(application);
+        let defaults = UserDefaults.standard
+        let isPreloaded = defaults.bool(forKey: "isPreloaded")
         if !isPreloaded {
-            preloadSchoolData()
-            preloadStudentsData()
-            preloadTeacherData()
-            defaults.setBool(true, forKey: "isPreloaded")
+            preloadSchoolData(application)
+            preloadStudentsData(application)
+            preloadTeacherData(application)
+            defaults.set(true, forKey: "isPreloaded")
         }
         FirebaseApp.configure()
         return true
@@ -122,50 +126,51 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
-    func parseSchoolCSV (contentsOfURL: NSURL, encoding: NSStringEncoding, error: NSErrorPointer) -> [(name:String, detail:String, price: String)]? {
+    func parseSchoolCSV (contentsOfURL: String, encoding: String.Encoding, error: NSErrorPointer) -> [(schoolid:String, password:String)]? {
         // Load the CSV file and parse it
         let delimiter = ","
-        var items:[(name:String, detail:String, price: String)]?
+        var items:[(schoolid:String, password:String)]?
         
-        if let content = String(contentsOfURL: contentsOfURL, encoding: encoding, error: error) {
+        do{
+            let content = try String(contentsOfFile: contentsOfURL, encoding: encoding)
             items = []
-            let lines:[String] = content.componentsSeparatedByCharactersInSet(NSCharacterSet.newlineCharacterSet()) as [String]
+            let lines:[String] = content.components(separatedBy: NSCharacterSet.newlines) as [String]
             
             for line in lines {
                 var values:[String] = []
                 if line != "" {
                     // For a line with double quotes
                     // we use NSScanner to perform the parsing
-                    if line.rangeOfString("\"") != nil {
+                    if line.range(of: "\"") != nil {
                         var textToScan:String = line
                         var value:NSString?
-                        var textScanner:NSScanner = NSScanner(string: textToScan)
+                        var textScanner:Scanner = Scanner(string: textToScan)
                         while textScanner.string != "" {
                             
-                            if (textScanner.string as NSString).substringToIndex(1) == "\"" {
+                            if (textScanner.string as NSString).substring(to: 1) == "\"" {
                                 textScanner.scanLocation += 1
-                                textScanner.scanUpToString("\"", intoString: &value)
+                                textScanner.scanUpTo("\"", into: &value)
                                 textScanner.scanLocation += 1
                             } else {
-                                textScanner.scanUpToString(delimiter, intoString: &value)
+                                textScanner.scanUpTo(delimiter, into: &value)
                             }
                             
                             // Store the value into the values array
-                            values.append(value as! String)
+                            values.append(value! as String)
                             
                             // Retrieve the unscanned remainder of the string
-                            if textScanner.scanLocation < count(textScanner.string) {
-                                textToScan = (textScanner.string as NSString).substringFromIndex(textScanner.scanLocation + 1)
+                            if textScanner.scanLocation < textScanner.string.count {
+                                textToScan = (textScanner.string as NSString).substring(from: textScanner.scanLocation + 1)
                             } else {
                                 textToScan = ""
                             }
-                            textScanner = NSScanner(string: textToScan)
+                            textScanner = Scanner(string: textToScan)
                         }
                         
                         // For a line without double quotes, we can simply separate the string
                         // by using the delimiter (e.g. comma)
                     } else  {
-                        values = line.componentsSeparatedByString(delimiter)
+                        values = line.components(separatedBy: delimiter)
                     }
                     
                     // Put the values into the tuple and add it to the items array
@@ -173,55 +178,59 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     items?.append(item)
                 }
             }
-        }
+        
+        } catch _ as NSError {
+                print("could not parse csv file")
+            }
         
         return items
     }
     
-    func parseTeachersCSV (contentsOfURL: NSURL, encoding: NSStringEncoding, error: NSErrorPointer) -> [(name:String, detail:String, price: String)]? {
+    func parseTeachersCSV (contentsOfURL: String, encoding: String.Encoding, error: NSErrorPointer) -> [(classid:String, teachersid:String, teachername: String)]? {
         // Load the CSV file and parse it
         let delimiter = ","
-        var items:[(name:String, detail:String, price: String)]?
+        var items:[(classid:String, teachersid:String, teachername: String)]?
         
-        if let content = String(contentsOfURL: contentsOfURL, encoding: encoding, error: error) {
+        do{
+            let content = try String(contentsOfFile: contentsOfURL, encoding: encoding)
             items = []
-            let lines:[String] = content.componentsSeparatedByCharactersInSet(NSCharacterSet.newlineCharacterSet()) as [String]
+            let lines:[String] = content.components(separatedBy: NSCharacterSet.newlines) as [String]
             
             for line in lines {
                 var values:[String] = []
                 if line != "" {
                     // For a line with double quotes
                     // we use NSScanner to perform the parsing
-                    if line.rangeOfString("\"") != nil {
+                    if line.range(of: "\"") != nil {
                         var textToScan:String = line
                         var value:NSString?
-                        var textScanner:NSScanner = NSScanner(string: textToScan)
+                        var textScanner:Scanner = Scanner(string: textToScan)
                         while textScanner.string != "" {
                             
-                            if (textScanner.string as NSString).substringToIndex(1) == "\"" {
+                            if (textScanner.string as NSString).substring(to: 1) == "\"" {
                                 textScanner.scanLocation += 1
-                                textScanner.scanUpToString("\"", intoString: &value)
+                                textScanner.scanUpTo("\"", into: &value)
                                 textScanner.scanLocation += 1
                             } else {
-                                textScanner.scanUpToString(delimiter, intoString: &value)
+                                textScanner.scanUpTo(delimiter, into: &value)
                             }
                             
                             // Store the value into the values array
-                            values.append(value as! String)
+                            values.append(value! as String)
                             
                             // Retrieve the unscanned remainder of the string
-                            if textScanner.scanLocation < count(textScanner.string) {
-                                textToScan = (textScanner.string as NSString).substringFromIndex(textScanner.scanLocation + 1)
+                            if textScanner.scanLocation < textScanner.string.count {
+                                textToScan = (textScanner.string as NSString).substring(from: textScanner.scanLocation + 1)
                             } else {
                                 textToScan = ""
                             }
-                            textScanner = NSScanner(string: textToScan)
+                            textScanner = Scanner(string: textToScan)
                         }
                         
                         // For a line without double quotes, we can simply separate the string
                         // by using the delimiter (e.g. comma)
                     } else  {
-                        values = line.componentsSeparatedByString(delimiter)
+                        values = line.components(separatedBy: delimiter)
                     }
                     
                     // Put the values into the tuple and add it to the items array
@@ -229,55 +238,61 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     items?.append(item)
                 }
             }
+            
+        } catch _ as NSError {
+            print("could not parse csv file")
         }
         
         return items
+     
+        
     }
     
-    func parseStudentsCSV (contentsOfURL: NSURL, encoding: NSStringEncoding, error: NSErrorPointer) -> [(name:String, detail:String, price: String)]? {
+    func parseStudentsCSV (contentsOfURL: String, encoding: String.Encoding, error: NSErrorPointer) -> [(classid:String, studentid:String, studentname: String)]? {
         // Load the CSV file and parse it
         let delimiter = ","
-        var items:[(name:String, detail:String, price: String)]?
+        var items:[(classid:String, studentid:String, studentname: String)]?
         
-        if let content = String(contentsOfURL: contentsOfURL, encoding: encoding, error: error) {
+        do {
+            let content = try String(contentsOfFile: contentsOfURL, encoding: encoding)
             items = []
-            let lines:[String] = content.componentsSeparatedByCharactersInSet(NSCharacterSet.newlineCharacterSet()) as [String]
+            let lines:[String] = content.components(separatedBy: NSCharacterSet.newlines) as [String]
             
             for line in lines {
                 var values:[String] = []
                 if line != "" {
                     // For a line with double quotes
                     // we use NSScanner to perform the parsing
-                    if line.rangeOfString("\"") != nil {
+                    if line.range(of:"\"") != nil {
                         var textToScan:String = line
                         var value:NSString?
-                        var textScanner:NSScanner = NSScanner(string: textToScan)
+                        var textScanner:Scanner = Scanner(string: textToScan)
                         while textScanner.string != "" {
                             
-                            if (textScanner.string as NSString).substringToIndex(1) == "\"" {
+                            if (textScanner.string as NSString).substring(to: 1) == "\"" {
                                 textScanner.scanLocation += 1
-                                textScanner.scanUpToString("\"", intoString: &value)
+                                textScanner.scanUpTo("\"", into: &value)
                                 textScanner.scanLocation += 1
                             } else {
-                                textScanner.scanUpToString(delimiter, intoString: &value)
+                                textScanner.scanUpTo(delimiter, into: &value)
                             }
                             
                             // Store the value into the values array
-                            values.append(value as! String)
+                            values.append(value! as String)
                             
                             // Retrieve the unscanned remainder of the string
-                            if textScanner.scanLocation < count(textScanner.string) {
-                                textToScan = (textScanner.string as NSString).substringFromIndex(textScanner.scanLocation + 1)
+                            if textScanner.scanLocation < textScanner.string.count {
+                                textToScan = (textScanner.string as NSString).substring(from: textScanner.scanLocation + 1)
                             } else {
                                 textToScan = ""
                             }
-                            textScanner = NSScanner(string: textToScan)
+                            textScanner = Scanner(string: textToScan)
                         }
                         
                         // For a line without double quotes, we can simply separate the string
                         // by using the delimiter (e.g. comma)
                     } else  {
-                        values = line.componentsSeparatedByString(delimiter)
+                        values = line.components(separatedBy:delimiter)
                     }
                     
                     // Put the values into the tuple and add it to the items array
@@ -285,146 +300,171 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     items?.append(item)
                 }
             }
+            
+        } catch _ as NSError{
+            print("could not parse csv")
         }
         
-        return items
+      return items
     }
     
-    func preloadSchoolData () {
+    func removeSchoolData () {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let managedObjectContext = appDelegate.persistentContainer.viewContext
+        // Remove the existing items
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "School")
+       
+        do{
+            let result = try managedObjectContext.fetch(fetchRequest)
+            let schoolItems = result as! [NSManagedObject]
+            for schoolItem in schoolItems {
+                    managedObjectContext.delete(schoolItem)
+            }
+                
+            } catch {
+                
+                print("Could Not Get School Context")
+                
+            }
+        
+    }
+    
+    func preloadSchoolData (_ application: UIApplication) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let managedObjectContext = appDelegate.persistentContainer.viewContext
         // Retrieve data from the source file
-        if let contentsOfURL = NSBundle.mainBundle().URLForResource("school", withExtension: "csv") {
+        if let contentsOfURL = Bundle.main.path(forResource: "school", ofType: "csv") {
             
             // Remove all the menu items before preloading
             removeSchoolData()
             
             var error:NSError?
-            if let items = parseSchoolCSV(contentsOfURL, encoding: NSUTF8StringEncoding, error: &error) {
+            if let items = parseSchoolCSV(contentsOfURL: contentsOfURL, encoding: String.Encoding.utf8, error: &error) {
                 // Preload the menu items
-                if let managedObjectContext = self.managedObjectContext {
-                    for item in items {
-                        let schoolItem = NSEntityDescription.insertNewObjectForEntityForName("School", inManagedObjectContext: managedObjectContext) as! School
-                        schoolItem.schoolid = item.schoolid
-                        schoolItem.password = item.password
-                        //menuItem.price = (item.price as NSString).doubleValue
-                        
-                        if managedObjectContext.save(&error) != true {
-                            println("insert error: \(error!.localizedDescription)")
-                        }
+                
+                for item in items {
+                    let entity = NSEntityDescription.entity(forEntityName: "School", in:  managedObjectContext)
+                    let schoolItem = NSManagedObject(entity: entity!, insertInto: managedObjectContext)
+                    schoolItem.setValue(item.schoolid, forKey: "schoolid")
+                    schoolItem.setValue(item.password, forKey: "password")
+                    
+                    //menuItem.price = (item.price as NSString).doubleValue
+                    do{
+                        try managedObjectContext.save()
+                    }catch _ as NSError{
+                        print("Could Not Save School Context")
                     }
                 }
+                
             }
         }
     }
     
-    func removeSchoolData () {
+    
+    func removeTeacherData () {
         // Remove the existing items
-        if let managedObjectContext = self.managedObjectContext {
-            let fetchRequest = NSFetchRequest(entityName: "School")
-            var e: NSError?
-            let schoolItems = managedObjectContext.executeFetchRequest(fetchRequest, error: &e) as! [School]
-            
-            if e != nil {
-                println("Failed to retrieve record: \(e!.localizedDescription)")
-                
-            } else {
-                
-                for schoolItem in schoolItems {
-                    managedObjectContext.deleteObject(schoolItem)
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let managedObjectContext = appDelegate.persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Teachers")
+        do{
+            let result = try managedObjectContext.fetch(fetchRequest)
+            let teacherItems = result as! [NSManagedObject]
+            for teacherItem in teacherItems {
+                    managedObjectContext.delete(teacherItem)
                 }
-            }
+            
+        } catch {
+            
+            print("Could Not Get Student Context")
+            
         }
+        
     }
     
-    func preloadTeacherData () {
+    func preloadTeacherData (_ application: UIApplication) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let managedObjectContext = appDelegate.persistentContainer.viewContext
         // Retrieve data from the source file
-        if let contentsOfURL = NSBundle.mainBundle().URLForResource("teachers", withExtension: "csv") {
+        if let contentsOfURL = Bundle.main.path(forResource: "teachers", ofType: "csv") {
             
             // Remove all the menu items before preloading
             removeTeacherData()
             
             var error:NSError?
-            if let items = parseTeachersCSV(contentsOfURL, encoding: NSUTF8StringEncoding, error: &error) {
+            if let items = parseTeachersCSV(contentsOfURL: contentsOfURL, encoding: String.Encoding.utf8, error: &error) {
                 // Preload the menu items
-                if let managedObjectContext = self.managedObjectContext {
-                    for item in items {
-                        let teacherItem = NSEntityDescription.insertNewObjectForEntityForName("Teachers", inManagedObjectContext: managedObjectContext) as! Teachers
-                        teacherItem.classid = item.classid
-                        teacherItem.teachersid = item.teachersid
-                        teacherItem.teachername = item.teachername
-                        //menuItem.price = (item.price as NSString).doubleValue
-                        
-                        if managedObjectContext.save(&error) != true {
-                            println("insert error: \(error!.localizedDescription)")
-                        }
+                for item in items {
+                    let entity = NSEntityDescription.entity(forEntityName: "Teachers", in:  managedObjectContext)
+                    let teacherItem = NSManagedObject(entity: entity!, insertInto: managedObjectContext)
+                    teacherItem.setValue(item.classid, forKey: "classid")
+                    teacherItem.setValue(item.teachersid, forKey: "teachersid")
+                    teacherItem.setValue(item.teachername, forKey: "teachername")
+                    
+                    //menuItem.price = (item.price as NSString).doubleValue
+                    do{
+                        try managedObjectContext.save()
+                    }catch _ as NSError{
+                        print("Could Not Save Teachers Context")
                     }
                 }
             }
         }
     }
     
-    func removeTeacherData () {
+
+    func removeStudentsData () {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let managedObjectContext = appDelegate.persistentContainer.viewContext
         // Remove the existing items
-        if let managedObjectContext = self.managedObjectContext {
-            let fetchRequest = NSFetchRequest(entityName: "Teachers")
-            var e: NSError?
-            let teacherItems = managedObjectContext.executeFetchRequest(fetchRequest, error: &e) as! [Teachers]
-            
-            if e != nil {
-                println("Failed to retrieve record: \(e!.localizedDescription)")
-                
-            } else {
-                
-                for teacherItem in teacherItems {
-                    managedObjectContext.deleteObject(teacherItem)
-                }
+        
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Students")
+        do{
+            let result = try managedObjectContext.fetch(fetchRequest)
+            let studentsItems = result as! [NSManagedObject]
+      
+            for studentsItem in studentsItems {
+                managedObjectContext.delete(studentsItem)
             }
+            
+        } catch {
+            
+             print("Could Not Get Student Context")
+            
         }
+   
     }
     
-    func preloadStudentsData () {
+    func preloadStudentsData (_ application: UIApplication) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let managedObjectContext = appDelegate.persistentContainer.viewContext
         // Retrieve data from the source file
-        if let contentsOfURL = NSBundle.mainBundle().URLForResource("students", withExtension: "csv") {
+        if let contentsOfURL = Bundle.main.path(forResource: "students", ofType: "csv") {
             
             // Remove all the menu items before preloading
             removeStudentsData()
             
             var error:NSError?
-            if let items = parseStudentsCSV(contentsOfURL, encoding: NSUTF8StringEncoding, error: &error) {
+            if let items = parseStudentsCSV(contentsOfURL: contentsOfURL, encoding: String.Encoding.utf8, error: &error) {
                 // Preload the menu items
-                if let managedObjectContext = self.managedObjectContext {
                     for item in items {
-                        let teacherItem = NSEntityDescription.insertNewObjectForEntityForName("Students", inManagedObjectContext: managedObjectContext) as! Students
-                        studentItem.classid = item.classid
-                        studentItem.studentid = item.studentid
-                        studentItem.studentname = item.studentname
+                        let entity = NSEntityDescription.entity(forEntityName: "Students", in:  managedObjectContext)
+                        let studentItem = NSManagedObject(entity: entity!, insertInto: managedObjectContext)
+                        studentItem.setValue(item.classid, forKey: "classid")
+                        studentItem.setValue(item.studentid, forKey: "studentid")
+                        studentItem.setValue(item.studentname, forKey: "studentname")
+                
                         //menuItem.price = (item.price as NSString).doubleValue
-                        
-                        if managedObjectContext.save(&error) != true {
-                            println("insert error: \(error!.localizedDescription)")
+                        do{
+                            try managedObjectContext.save()
+                        }catch _ as NSError{
+                            print("Could Not Save Student Context")
                         }
                     }
-                }
+                
             }
         }
     }
     
-    func removeStudentsData () {
-        // Remove the existing items
-        if let managedObjectContext = self.managedObjectContext {
-            let fetchRequest = NSFetchRequest(entityName: "Students")
-            var e: NSError?
-            let teacherItems = managedObjectContext.executeFetchRequest(fetchRequest, error: &e) as! [Students]
-            
-            if e != nil {
-                println("Failed to retrieve record: \(e!.localizedDescription)")
-                
-            } else {
-                
-                for studentsItem in studentsItems {
-                    managedObjectContext.deleteObject(studentsItem)
-                }
-            }
-        }
-    }
+
 }
 
