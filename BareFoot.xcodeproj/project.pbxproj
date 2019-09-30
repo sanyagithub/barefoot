@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		02C3CE51023C5B82B96D2F34 /* Pods_BareFootTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD8D21AAF0238802EBA06470 /* Pods_BareFootTests.framework */; };
-		3F5B45512332254100AE5E73 /* CoreBuetoothViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5B45502332254100AE5E73 /* CoreBuetoothViewController.swift */; };
+		3F0CAAC2234201710055AA9F /* Definitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0CAAC1234201710055AA9F /* Definitions.swift */; };
 		3F61A52E2315C5800065E822 /* PrepareLesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F61A52D2315C5800065E822 /* PrepareLesson.swift */; };
 		3F61A5302315CD490065E822 /* Attendance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F61A52F2315CD490065E822 /* Attendance.swift */; };
 		3F61A5322315CEF40065E822 /* TakePhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F61A5312315CEF40065E822 /* TakePhoto.swift */; };
@@ -55,7 +55,7 @@
 		1262AD53EF0009A443ED72B3 /* Pods-BareFootTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BareFootTests.release.xcconfig"; path = "Target Support Files/Pods-BareFootTests/Pods-BareFootTests.release.xcconfig"; sourceTree = "<group>"; };
 		1DFDB741C03867396F03BACE /* Pods_BareFootUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BareFootUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		33379E708ACD17AB10CD718F /* Pods-BareFoot.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BareFoot.release.xcconfig"; path = "Target Support Files/Pods-BareFoot/Pods-BareFoot.release.xcconfig"; sourceTree = "<group>"; };
-		3F5B45502332254100AE5E73 /* CoreBuetoothViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreBuetoothViewController.swift; sourceTree = "<group>"; };
+		3F0CAAC1234201710055AA9F /* Definitions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Definitions.swift; sourceTree = "<group>"; };
 		3F61A52D2315C5800065E822 /* PrepareLesson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrepareLesson.swift; sourceTree = "<group>"; };
 		3F61A52F2315CD490065E822 /* Attendance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attendance.swift; sourceTree = "<group>"; };
 		3F61A5312315CEF40065E822 /* TakePhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakePhoto.swift; sourceTree = "<group>"; };
@@ -156,7 +156,7 @@
 				3FC262D8231543F800017379 /* Dashboard.swift */,
 				3F61A52D2315C5800065E822 /* PrepareLesson.swift */,
 				3F61A533231685980065E822 /* Activity.swift */,
-				3F5B45502332254100AE5E73 /* CoreBuetoothViewController.swift */,
+				3F0CAAC1234201710055AA9F /* Definitions.swift */,
 			);
 			path = BareFoot;
 			sourceTree = "<group>";
@@ -430,9 +430,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F0CAAC2234201710055AA9F /* Definitions.swift in Sources */,
 				3FC262A823151D4300017379 /* ViewController.swift in Sources */,
 				3F61A5322315CEF40065E822 /* TakePhoto.swift in Sources */,
-				3F5B45512332254100AE5E73 /* CoreBuetoothViewController.swift in Sources */,
 				3F61A52E2315C5800065E822 /* PrepareLesson.swift in Sources */,
 				3FF50A8A233B6CEC001EB9CB /* PeripheralViewController.swift in Sources */,
 				3FC262D723153C4000017379 /* LoginScreen.swift in Sources */,
@@ -613,6 +613,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-2";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = NH929XX8JA;
 				INFOPLIST_FILE = BareFoot/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.barefoot.BareFoot;
@@ -628,6 +629,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-2";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = NH929XX8JA;
 				INFOPLIST_FILE = BareFoot/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.barefoot.BareFoot;
