@@ -117,7 +117,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="90Y-Dm-uYq">
                                 <rect key="frame" x="0.0" y="204" width="375" height="574"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ijk-zx-iU0">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ijk-zx-iU0" customClass="UIButton">
                                         <rect key="frame" x="19" y="32" width="156" height="182"/>
                                         <subviews>
                                             <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Icon_lesson" translatesAutoresizingMaskIntoConstraints="NO" id="9ME-zd-3Dd">
@@ -146,8 +146,11 @@
                                             <constraint firstItem="9ME-zd-3Dd" firstAttribute="centerX" secondItem="Ijk-zx-iU0" secondAttribute="centerX" id="nJV-ib-S0M"/>
                                             <constraint firstItem="9ME-zd-3Dd" firstAttribute="top" secondItem="Ijk-zx-iU0" secondAttribute="top" constant="58" id="vVg-rW-Y3L"/>
                                         </constraints>
+                                        <connections>
+                                            <action selector="loadPrepareLessons:" destination="evH-O6-5aB" eventType="touchUpInside" id="77B-8l-9KX"/>
+                                        </connections>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zQu-x9-OY8">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zQu-x9-OY8" customClass="UIButton">
                                         <rect key="frame" x="201" y="258" width="156" height="269"/>
                                         <subviews>
                                             <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Icon_Records" translatesAutoresizingMaskIntoConstraints="NO" id="TBA-2D-ThL">
@@ -178,7 +181,7 @@
                                             <constraint firstItem="kyv-Z0-utR" firstAttribute="leading" secondItem="zQu-x9-OY8" secondAttribute="leading" constant="15" id="vlB-OZ-0yF"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uyp-eh-IhI">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uyp-eh-IhI" userLabel="Attendance" customClass="UIButton">
                                         <rect key="frame" x="201" y="32" width="156" height="182"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dzp-D1-7vd">
@@ -211,8 +214,11 @@
                                             <constraint firstAttribute="bottom" secondItem="Dzp-D1-7vd" secondAttribute="bottom" constant="28" id="M9G-WC-0hh"/>
                                             <constraint firstItem="0u5-dz-e8N" firstAttribute="centerX" secondItem="Dzp-D1-7vd" secondAttribute="centerX" id="fzJ-Ve-AOA"/>
                                         </constraints>
+                                        <connections>
+                                            <action selector="loadAttendance:" destination="evH-O6-5aB" eventType="touchUpInside" id="i22-qS-Oby"/>
+                                        </connections>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gjt-uj-X6Y">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gjt-uj-X6Y" customClass="UIButton">
                                         <rect key="frame" x="19" y="258" width="156" height="269"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i5p-7M-ugG">
@@ -242,6 +248,9 @@
                                             <constraint firstItem="BKE-Rn-pif" firstAttribute="centerY" secondItem="gjt-uj-X6Y" secondAttribute="centerY" id="rmX-N9-b3I"/>
                                             <constraint firstItem="BKE-Rn-pif" firstAttribute="top" secondItem="gjt-uj-X6Y" secondAttribute="top" constant="58" id="t5P-sR-MhN"/>
                                         </constraints>
+                                        <connections>
+                                            <action selector="loadActivityCapture:" destination="evH-O6-5aB" eventType="touchUpInside" id="07K-Ri-nw2"/>
+                                        </connections>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" red="0.96864080429999999" green="0.96861994269999996" blue="0.96862399580000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -354,18 +363,11 @@
                         <viewLayoutGuide key="safeArea" id="0Cl-YE-bDb"/>
                     </view>
                     <connections>
-                        <outlet property="Activity" destination="gjt-uj-X6Y" id="X9Z-tu-IBU"/>
-                        <outlet property="Attendace" destination="uyp-eh-IhI" id="7kP-lF-8Nh"/>
-                        <outlet property="Attendance" destination="uyp-eh-IhI" id="st2-IT-gKp"/>
-                        <outlet property="CaptureActivity" destination="gjt-uj-X6Y" id="adc-kH-3o5"/>
                         <outlet property="Date" destination="dNh-ah-xxB" id="SvH-UC-lxx"/>
                         <outlet property="Day" destination="lna-EG-8bn" id="llf-U6-Run"/>
                         <outlet property="Logout" destination="KsU-cm-xB3" id="yUk-IS-65i"/>
-                        <outlet property="PrepareLessons" destination="Ijk-zx-iU0" id="bMu-j1-7rb"/>
-                        <outlet property="Records" destination="zQu-x9-OY8" id="eo4-db-CId"/>
                         <outlet property="SyncNow" destination="gfU-tL-aq2" id="MGN-hw-rgy"/>
                         <outlet property="TeacherName" destination="bL9-eM-ate" id="kqy-up-sfi"/>
-                        <outlet property="ViewRecords" destination="zQu-x9-OY8" id="AwK-OD-wJ6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GCm-Au-vRq" userLabel="First Responder" sceneMemberID="firstResponder"/>

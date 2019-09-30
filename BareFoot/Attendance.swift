@@ -8,8 +8,6 @@
 
 import UIKit
 
-import UIKit
-
 class Attendance: UIViewController {
     
     override func viewDidLoad() {

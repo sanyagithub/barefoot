@@ -23,6 +23,22 @@ class Dashboard: UIViewController {
     @IBOutlet weak var Date: UILabel!
     @IBOutlet weak var Day: UILabel!
     
+
+    @IBAction func loadAttendance(_ sender: Any) {
+        
+        loadAttendance()
+    }
+    
+    @IBAction func loadPrepareLessons(_ sender: Any) {
+        
+        loadPrepareLessons()
+    }
+    
+    @IBAction func loadActivityCapture(_ sender: Any) {
+        
+        loadActivity()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         TeacherName?.text = getTeacherName(TeacherId: TeacherId)
@@ -68,31 +84,23 @@ class Dashboard: UIViewController {
         return ""
     }
     
-    @IBOutlet weak var PrepareLessons: UIView!
-    
-    @IBOutlet weak var Attendace: UIView!
-    
-    @IBOutlet weak var Activity: UIView!
-    @IBOutlet weak var Records: UIView!
+
     
     func loadPrepareLessons(){
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let loggedInViewController = storyBoard.instantiateViewController(withIdentifier: "Dashboard") as! Dashboard
-        loggedInViewController.TeacherId = TeacherId
+        let loggedInViewController = storyBoard.instantiateViewController(withIdentifier: "PrepareLesson") as! PrepareLesson
         self.present(loggedInViewController, animated: true, completion: nil)
     }
     
     func loadAttendance(){
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let loggedInViewController = storyBoard.instantiateViewController(withIdentifier: "Dashboard") as! Dashboard
-        loggedInViewController.TeacherId = TeacherId
+        let loggedInViewController = storyBoard.instantiateViewController(withIdentifier: "Attendance") as! Attendance
         self.present(loggedInViewController, animated: true, completion: nil)
     }
     
     func loadActivity(){
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let loggedInViewController = storyBoard.instantiateViewController(withIdentifier: "Dashboard") as! Dashboard
-        loggedInViewController.TeacherId = TeacherId
+        let loggedInViewController = storyBoard.instantiateViewController(withIdentifier: "Activity") as! Activity
         self.present(loggedInViewController, animated: true, completion: nil)
     }
 }

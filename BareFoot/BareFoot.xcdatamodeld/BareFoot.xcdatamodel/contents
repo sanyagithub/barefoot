@@ -7,7 +7,6 @@
         <attribute name="desc" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="image" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="attendance" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AttendanceTable" syncable="YES"/>
     </entity>
     <entity name="AttendanceTable" representedClassName="AttendanceTable" syncable="YES" codeGenerationType="class">
         <attribute name="attendanceid" optional="YES" attributeType="String" syncable="YES"/>
@@ -21,7 +20,6 @@
         <attribute name="image" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="lessonplanid" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="teacherid" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="teacher" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Teachers" syncable="YES"/>
     </entity>
     <entity name="School" representedClassName="School" syncable="YES" codeGenerationType="class">
         <attribute name="password" optional="YES" attributeType="String" syncable="YES"/>
@@ -31,7 +29,6 @@
         <attribute name="attendaceid" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="studentId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="studentPresence" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="attendance" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AttendanceTable" syncable="YES"/>
     </entity>
     <entity name="Students" representedClassName="Students" syncable="YES" codeGenerationType="class">
         <attribute name="classid" optional="YES" attributeType="String" syncable="YES"/>
@@ -42,17 +39,16 @@
         <attribute name="classid" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="teachername" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="teachersid" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="students" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Students" syncable="YES"/>
     </entity>
     <fetchRequest name="FetchRequest" entity="Activities"/>
     <configuration name="Configuration"/>
     <elements>
-        <element name="Activities" positionX="223" positionY="126" width="128" height="148"/>
+        <element name="Activities" positionX="223" positionY="126" width="128" height="135"/>
         <element name="AttendanceTable" positionX="187" positionY="-81" width="128" height="118"/>
-        <element name="LessonPlan" positionX="0" positionY="45" width="128" height="118"/>
+        <element name="LessonPlan" positionX="0" positionY="45" width="128" height="105"/>
         <element name="School" positionX="-153" positionY="-243" width="128" height="73"/>
-        <element name="StudentPresence" positionX="196" positionY="-279" width="128" height="103"/>
+        <element name="StudentPresence" positionX="196" positionY="-279" width="128" height="90"/>
         <element name="Students" positionX="-189" positionY="-126" width="128" height="88"/>
-        <element name="Teachers" positionX="-450" positionY="-54" width="128" height="105"/>
+        <element name="Teachers" positionX="-450" positionY="-54" width="128" height="90"/>
     </elements>
 </model>

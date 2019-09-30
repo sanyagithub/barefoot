@@ -29,8 +29,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let isPreloaded = defaults.bool(forKey: "isPreloaded")
         if !isPreloaded {
             preloadSchoolData(application)
-            preloadStudentsData(application)
-            preloadTeacherData(application)
+//            preloadStudentsData(application)
+//            preloadTeacherData(application)
             defaults.set(true, forKey: "isPreloaded")
         }
         FirebaseApp.configure()
@@ -104,7 +104,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                  * The store could not be migrated to the current model version.
                  Check the error message to determine what the actual problem was.
                  */
-                fatalError("Unresolved error \(error), \(error.userInfo)")
+                print("Unresolved error \(error), \(error.userInfo)")
             }
         })
         return container
@@ -330,8 +330,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func preloadSchoolData (_ application: UIApplication) {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let managedObjectContext = appDelegate.persistentContainer.viewContext
+       // let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let managedObjectContext = persistentContainer.viewContext
         // Retrieve data from the source file
         if let contentsOfURL = Bundle.main.path(forResource: "school", ofType: "csv") {
             
@@ -382,8 +382,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func preloadTeacherData (_ application: UIApplication) {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let managedObjectContext = appDelegate.persistentContainer.viewContext
+      //  let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let managedObjectContext = persistentContainer.viewContext
         // Retrieve data from the source file
         if let contentsOfURL = Bundle.main.path(forResource: "teachers", ofType: "csv") {
             
