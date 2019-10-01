@@ -433,7 +433,7 @@
         <!--Prepare Lesson-->
         <scene sceneID="fDm-cy-2Qy">
             <objects>
-                <viewController id="esj-fv-Jui" customClass="PrepareLesson" customModule="BareFoot" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PrepareLesson" useStoryboardIdentifierAsRestorationIdentifier="YES" id="esj-fv-Jui" customClass="PrepareLesson" customModule="BareFoot" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="S6T-6r-uPx">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -546,7 +546,7 @@
         <!--Attendance-->
         <scene sceneID="n2v-IZ-IOk">
             <objects>
-                <viewController id="KeB-4I-QW8" userLabel="Attendance" customClass="Attendance" customModule="BareFoot" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Attendance" useStoryboardIdentifierAsRestorationIdentifier="YES" id="KeB-4I-QW8" userLabel="Attendance" customClass="Attendance" customModule="BareFoot" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5xt-GD-JrW">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -633,7 +633,7 @@
         <!--Take Photo-->
         <scene sceneID="RSP-pV-HzV">
             <objects>
-                <viewController id="lIg-Ly-YDC" userLabel="Take Photo" customClass="TakePhoto" customModule="BareFoot" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Activity" useStoryboardIdentifierAsRestorationIdentifier="YES" id="lIg-Ly-YDC" userLabel="Take Photo" customClass="TakePhoto" customModule="BareFoot" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="UTT-Vh-2cR">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

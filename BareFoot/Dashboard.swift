@@ -100,7 +100,7 @@ class Dashboard: UIViewController {
     
     func loadActivity(){
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let loggedInViewController = storyBoard.instantiateViewController(withIdentifier: "Activity") as! Activity
+        let loggedInViewController = storyBoard.instantiateViewController(withIdentifier: "Activity") as! TakePhoto
         self.present(loggedInViewController, animated: true, completion: nil)
     }
 }
