@@ -29,8 +29,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let isPreloaded = defaults.bool(forKey: "isPreloaded")
         if !isPreloaded {
             preloadSchoolData(application)
-//            preloadStudentsData(application)
-//            preloadTeacherData(application)
+            preloadStudentsData(application)
+            preloadTeacherData(application)
             defaults.set(true, forKey: "isPreloaded")
         }
         FirebaseApp.configure()
@@ -234,7 +234,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     }
                     
                     // Put the values into the tuple and add it to the items array
-                    let item = (classid: values[0], teachersid: values[1], teachername: values[1])
+                    let item = (classid: values[0], teachersid: values[1], teachername: values[2])
                     items?.append(item)
                 }
             }

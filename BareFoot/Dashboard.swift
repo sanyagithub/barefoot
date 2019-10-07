@@ -48,6 +48,12 @@ class Dashboard: UIViewController {
         formatter.dateFormat = "dd/MM/yyyy"
         let result = formatter.string(from: date as Date)
         Date.text = result
+        
+        let formatter2 = DateFormatter()
+        formatter2.dateFormat = "EEEE"
+        let result2 = formatter2.string(from: date as Date)
+        Day.text = result2
+        
         // Do any additional setup after loading the view, typically from a nib.
     }
     
@@ -57,6 +63,7 @@ class Dashboard: UIViewController {
     }
     
     func getTeacherName(TeacherId: String) -> String {
+        var teachersname = ""
         //As we know that container is set up in the AppDelegates so we need to refer that container.
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return "" }
         
@@ -70,18 +77,20 @@ class Dashboard: UIViewController {
             for data in result as! [NSManagedObject] {
                 let teacherid = data.value(forKey: "teachersid") as! String
                 if(TeacherId == "\(teacherid)"){
-                    return data.value(forKey: "teachername") as! String
+                    teachersname = data.value(forKey: "teachername") as! String
+                    break
                 } else {
-                    return "No Teacher of with ID"
+                    teachersname = "No Teacher of with ID"
                 }
             }
             
         } catch {
             
-            return "No Teacher of with ID"
+            teachersname = "No Teacher of with ID"
         }
         
-        return ""
+        return teachersname
+        
     }
     
 

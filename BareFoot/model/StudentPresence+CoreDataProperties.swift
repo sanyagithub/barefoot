@@ -19,6 +19,5 @@ extension StudentPresence {
     @NSManaged public var attendaceid: String?
     @NSManaged public var studentId: String?
     @NSManaged public var studentPresence: Bool
-    @NSManaged public var attendance: AttendanceTable?
 
 }

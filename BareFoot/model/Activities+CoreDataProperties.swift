@@ -22,6 +22,6 @@ extension Activities {
     @NSManaged public var desc: String?
     @NSManaged public var image: NSData?
     @NSManaged public var name: String?
-    @NSManaged public var attendance: AttendanceTable?
+  
 
 }

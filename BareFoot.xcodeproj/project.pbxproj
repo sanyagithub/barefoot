@@ -14,6 +14,9 @@
 		3F61A5322315CEF40065E822 /* TakePhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F61A5312315CEF40065E822 /* TakePhoto.swift */; };
 		3F61A534231685980065E822 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F61A533231685980065E822 /* Activity.swift */; };
 		3F6928FA2317110300E6858A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3F6928F92317110300E6858A /* GoogleService-Info.plist */; };
+		3FC24A89234910D500EC14CD /* school.csv in Resources */ = {isa = PBXBuildFile; fileRef = 3FC24A88234910D500EC14CD /* school.csv */; };
+		3FC24A8B234910E200EC14CD /* students.csv in Resources */ = {isa = PBXBuildFile; fileRef = 3FC24A8A234910E200EC14CD /* students.csv */; };
+		3FC24A8D234910EA00EC14CD /* teachers.csv in Resources */ = {isa = PBXBuildFile; fileRef = 3FC24A8C234910EA00EC14CD /* teachers.csv */; };
 		3FC262A623151D4300017379 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC262A523151D4300017379 /* AppDelegate.swift */; };
 		3FC262A823151D4300017379 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC262A723151D4300017379 /* ViewController.swift */; };
 		3FC262AB23151D4300017379 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FC262A923151D4300017379 /* Main.storyboard */; };
@@ -61,6 +64,9 @@
 		3F61A5312315CEF40065E822 /* TakePhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakePhoto.swift; sourceTree = "<group>"; };
 		3F61A533231685980065E822 /* Activity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
 		3F6928F92317110300E6858A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		3FC24A88234910D500EC14CD /* school.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = school.csv; sourceTree = "<group>"; };
+		3FC24A8A234910E200EC14CD /* students.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = students.csv; sourceTree = "<group>"; };
+		3FC24A8C234910EA00EC14CD /* teachers.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = teachers.csv; sourceTree = "<group>"; };
 		3FC262A223151D4300017379 /* BareFoot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BareFoot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FC262A523151D4300017379 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3FC262A723151D4300017379 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -140,6 +146,9 @@
 		3FC262A423151D4300017379 /* BareFoot */ = {
 			isa = PBXGroup;
 			children = (
+				3FC24A8C234910EA00EC14CD /* teachers.csv */,
+				3FC24A8A234910E200EC14CD /* students.csv */,
+				3FC24A88234910D500EC14CD /* school.csv */,
 				3FF50A89233B6CEC001EB9CB /* PeripheralViewController.swift */,
 				3FF50A85233B6CAA001EB9CB /* CentralViewController.swift */,
 				3FC262A523151D4300017379 /* AppDelegate.swift */,
@@ -313,8 +322,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3FC24A8B234910E200EC14CD /* students.csv in Resources */,
 				3F6928FA2317110300E6858A /* GoogleService-Info.plist in Resources */,
+				3FC24A8D234910EA00EC14CD /* teachers.csv in Resources */,
 				3FC262B323151D4300017379 /* LaunchScreen.storyboard in Resources */,
+				3FC24A89234910D500EC14CD /* school.csv in Resources */,
 				3FC262B023151D4300017379 /* Assets.xcassets in Resources */,
 				3FC262AB23151D4300017379 /* Main.storyboard in Resources */,
 			);
@@ -615,6 +627,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = NH929XX8JA;
 				INFOPLIST_FILE = BareFoot/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.barefoot.BareFoot;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -631,6 +644,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = NH929XX8JA;
 				INFOPLIST_FILE = BareFoot/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.4.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.barefoot.BareFoot;
 				PRODUCT_NAME = "$(TARGET_NAME)";

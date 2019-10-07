@@ -16,10 +16,10 @@ class LoginScreen: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        TeacherId.text = ""
-        SchoolId.text = ""
-        Password.text = ""
-      
+//        TeacherId.text = ""
+//        SchoolId.text = ""
+//        Password.text = ""
+//
         // Do any additional setup after loading the view, typically from a nib.
     }
     
@@ -51,6 +51,7 @@ class LoginScreen: UIViewController {
                 let password = data.value(forKey: "password") as! String
                 if((SchoolId.text! == "\(schoolid)") && (Password.text! == "\(password)")){
                     self.loadDashboard()
+                    break
                 } 
             }
             
