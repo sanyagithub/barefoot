@@ -104,6 +104,7 @@ class Dashboard: UIViewController {
     func loadAttendance(){
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let loggedInViewController = storyBoard.instantiateViewController(withIdentifier: "Attendance") as! Attendance
+        loggedInViewController.teacherid = TeacherId
         self.present(loggedInViewController, animated: true, completion: nil)
     }
     

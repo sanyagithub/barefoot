@@ -9,11 +9,52 @@
 import UIKit
 import CoreData
 
-class PrepareLesson: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate  {
+class PrepareLesson: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIPickerViewDelegate, UIPickerViewDataSource  {
     
     var imagePicker: UIImagePickerController!
+    var selectedTeacher: String!
+    var date :NSDate?
+    var teacherid:String!
+
     
+    @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var imageView: UIImageView!
+    
+    @IBOutlet weak var createLesson: UIButton!
+    
+    @IBAction func createLessonAction(_ sender: Any) {
+        date = datePicker.date as NSDate
+        let id = UUID()
+        guard let imageData = UIImageJPEGRepresentation(imageView.image!, 1) else {
+            // handle failed conversion
+            print("jpg error")
+            return
+        }
+        
+        let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        
+        //We need to create a context from this container
+        guard let context = appDelegate?.persistentContainer.viewContext else { return }
+        
+        let entity = NSEntityDescription.entity(forEntityName: "LessonPlan", in:  context)
+        let lessonPlanItem = NSManagedObject(entity: entity!, insertInto: context)
+        lessonPlanItem.setValue(date, forKey: "date")
+        lessonPlanItem.setValue(imageData, forKey: "image")
+        
+        lessonPlanItem.setValue(id.uuidString, forKey: "lessonplanid")
+        lessonPlanItem.setValue(teacherid, forKey: "teacherid")
+        
+        do{
+            try context.save()
+        }catch _ as NSError{
+            print("Could Not Save School Context")
+        }
+        
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let loggedInViewController = storyBoard.instantiateViewController(withIdentifier: "Dashboard") as! Dashboard
+        self.present(loggedInViewController, animated: true, completion: nil)
+        
+    }
     @IBAction func takePhoto(_ sender: Any) {
         imagePicker =  UIImagePickerController()
         imagePicker.delegate = self
@@ -23,27 +64,31 @@ class PrepareLesson: UIViewController, UINavigationControllerDelegate, UIImagePi
     
     @IBOutlet weak var selectTeacher: UIPickerView!
     var pickerData: [String] = [String]()
+    var pickerDataId: [String] = [String]()
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
         // Connect data:
-        self.selectTeacher.delegate = self as? UIPickerViewDelegate
-        self.selectTeacher.dataSource = self as? UIPickerViewDataSource
+        self.selectTeacher.delegate = self
+        self.selectTeacher.dataSource = self
         
         let appDelegate = UIApplication.shared.delegate as? AppDelegate
-//
-//        //We need to create a context from this container
+
+        //We need to create a context from this container
         let managedContext = appDelegate?.persistentContainer.viewContext
-//
+
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Teachers")
         request.returnsObjectsAsFaults = false
+        
         do {
             let result = try managedContext?.fetch(request)
             for data in result as! [NSManagedObject] {
                 let teachersname = data.value(forKey: "teachername") as! String
+                let teachersid = data.value(forKey: "teachersid") as! String
                 self.pickerData.append(teachersname)
+                self.pickerDataId.append(teachersid)
             }
             
             // success ...
@@ -52,8 +97,6 @@ class PrepareLesson: UIViewController, UINavigationControllerDelegate, UIImagePi
             print("Fetch failed: \(error.localizedDescription)")
         }
       
-        print(self.pickerData.count)
-        selectTeacher.dataSource = pickerData as? UIPickerViewDataSource
         // Do any additional setup after loading the view, typically from a nib.
     }
     
@@ -83,9 +126,13 @@ class PrepareLesson: UIViewController, UINavigationControllerDelegate, UIImagePi
     }
     
     // Capture the picker view selection
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         // This method is triggered whenever the user makes a change to the picker selection.
         // The parameter named row and component represents what was selected.
+        selectedTeacher = pickerData[pickerView.selectedRow(inComponent: component)]
+        teacherid = pickerDataId[pickerView.selectedRow(inComponent: component)]
+        
+      
     }
     
 
