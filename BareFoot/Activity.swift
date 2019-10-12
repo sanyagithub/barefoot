@@ -12,6 +12,10 @@ class Activity: UIViewController, UINavigationControllerDelegate, UIImagePickerC
     
     var imagePicker: UIImagePickerController!
     
+    
+    @IBOutlet weak var activityName: UITextView!
+    
+    @IBOutlet weak var activityDescription: UITextView!
     @IBAction func CreateActivityButton(_ sender: Any) {
     }
     

@@ -18,7 +18,6 @@ class Dashboard: UIViewController {
     @IBOutlet weak var TeacherName: UILabel!
     
     @IBOutlet weak var Logout: UIButton!
-    @IBOutlet weak var SyncNow: UIButton!
     
     @IBOutlet weak var Date: UILabel!
     @IBOutlet weak var Day: UILabel!
@@ -34,11 +33,18 @@ class Dashboard: UIViewController {
         loadPrepareLessons()
     }
     
+    
     @IBAction func loadActivityCapture(_ sender: Any) {
         
         loadActivity()
     }
     
+    @IBAction func syncNow(_ sender: Any) {
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let loggedInViewController = storyBoard.instantiateViewController(withIdentifier: "BluetoothViewController") as! BluetoothViewController
+        self.present(loggedInViewController, animated: true, completion: nil)
+        
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         TeacherName?.text = getTeacherName(TeacherId: TeacherId)
@@ -110,7 +116,7 @@ class Dashboard: UIViewController {
     
     func loadActivity(){
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let loggedInViewController = storyBoard.instantiateViewController(withIdentifier: "Activity") as! TakePhoto
+        let loggedInViewController = storyBoard.instantiateViewController(withIdentifier: "Activity") as! Activity
         self.present(loggedInViewController, animated: true, completion: nil)
     }
 }

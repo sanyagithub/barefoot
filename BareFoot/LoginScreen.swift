@@ -12,10 +12,13 @@ import CoreData
 
 
 
-class LoginScreen: UIViewController {
+class LoginScreen: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.TeacherId.delegate = self
+        self.SchoolId.delegate = self
+        self.Password.delegate = self
 //        TeacherId.text = ""
 //        SchoolId.text = ""
 //        Password.text = ""
@@ -60,6 +63,11 @@ class LoginScreen: UIViewController {
             self.displayErrorMessage(message: "Invalid SchoolId/Password")
         }
       
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
     }
     
     func displayErrorMessage(message:String) {

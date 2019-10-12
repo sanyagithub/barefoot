@@ -12,7 +12,19 @@ import Firebase
 
 
 
-
+struct Constants {
+    
+    static let MBPeripheralName = "MBBLEDataExchange"
+    
+    struct ServicesKey {
+        static let kTransferServiceUUID = "FB694B90-F49E-4598-8306-171BBA78F846"
+    }
+    
+    struct CharacteristicsKey {
+        static let kTransferCharacteristicUUID  = "EB6727C4-F194-497A-A656-76B0CDAC633A"
+    }
+    static let kNotify = 20
+}
 
 
 
