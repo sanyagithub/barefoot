@@ -31,10 +31,28 @@ class BluetoothViewController: UIViewController, MCSessionDelegate, MCBrowserVie
     var activities: [Activity] = [Activity]()
     var attendanceTable: [AttendanceTable] = [AttendanceTable]()
     var lessonPlan: [LessonPlan] = [LessonPlan]()
+    var studentPresence: [StudentPresence] = [StudentPresence]()
     
     @IBAction func sendLessonPlan(_ sender: Any) {
         
         print("Data has been recieved")
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let managedObjectContext = appDelegate.persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "LessonPlan")
+        do{
+            let result = try managedObjectContext.fetch(fetchRequest)
+            let activitiesLocal = result as! [LessonPlan]
+            for activity in activitiesLocal{
+            lessonPlan.append(activity)
+                }
+        } catch {
+            
+            print("Could Not Get Activity Context")
+            
+        }
+        
+        sendLessonPlan(data: lessonPlan)
     
         
     }
@@ -57,7 +75,21 @@ class BluetoothViewController: UIViewController, MCSessionDelegate, MCBrowserVie
             
         }
         
-//        sendAttendance(attendanceTable)
+        let fetchRequest1 = NSFetchRequest<NSFetchRequestResult>(entityName: "StudentPresence")
+                   do{
+                       let result = try managedObjectContext.fetch(fetchRequest1)
+                       let activitiesLocal = result as! [StudentPresence]
+                       for activity in activitiesLocal{
+                           studentPresence.append(activity)
+                       }
+               } catch {
+                   
+                   print("Could Not Get Activity Context")
+                   
+               }
+               
+        sendAttendanceData(data: attendanceTable, studentPresence: studentPresence)
+    
     }
     @IBAction func sendActivities(_ sender: Any) {
         
@@ -65,12 +97,12 @@ class BluetoothViewController: UIViewController, MCSessionDelegate, MCBrowserVie
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let managedObjectContext = appDelegate.persistentContainer.viewContext
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "LessonPlan")
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Activities")
             do{
                 let result = try managedObjectContext.fetch(fetchRequest)
-                let activitiesLocal = result as! [LessonPlan]
+                let activitiesLocal = result as! [Activity]
                 for activity in activitiesLocal{
-                    lessonPlan.append(activity)
+                    activities.append(activity)
                 }
         } catch {
             
@@ -127,6 +159,9 @@ class BluetoothViewController: UIViewController, MCSessionDelegate, MCBrowserVie
 
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         print("Data has been recieved")
+        let ac = UIAlertController(title: "Recieving Data", message: "Data has been received", preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "OK", style: .default))
+        present(ac, animated: true)
     }
     
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {

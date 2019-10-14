@@ -163,7 +163,7 @@ class Attendance: UIViewController, UITableViewDataSource, UITableViewDelegate{
             }
             else{
                 cell.accessoryType = .checkmark
-                selectedStudentIdList.insert(studentIdList[indexPath.row], at: indexPath.row)
+                selectedStudentIdList.append(studentIdList[indexPath.row])
             }
         }
         
